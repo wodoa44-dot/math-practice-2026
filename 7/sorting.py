@@ -1,4 +1,5 @@
 import logging
+import copy
 
 def bubble(lst):
     logging.debug("Bubble sort function")

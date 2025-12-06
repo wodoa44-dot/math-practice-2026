@@ -6,16 +6,24 @@ import random
 from sorting import bubble, insertion, mergesort
 
 def generate_random_list(n):
-    pass
+    ret = []
+    for _ in range(n):
+        rand = random.randint(1, 10000)
+        ret.append(rand)
+    return ret
 
 def evaluate(func, lst):
-    pass
+    start = time.time()
+    ret = func(lst)
+    end = time.time()
+
+    return ret, end - start
 
 def command_line_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--name", required=True, help="Name of the sorting algorithm", choices=["bubble", "insertion", "merge"])
-    parser.add_argument("-i", "--input", help-"List to be sorted", type=int, nargs="+")
-    parser.add_argument("-e", "--elements", help-"Number of elements", type=int)
+    parser.add_argument("-i", "--input", help="List to be sorted", type=int, nargs="+")
+    parser.add_argument("-e", "--elements", help="Number of elements", type=int)
     parser.add_argument("-l", "--log", help="Log level (DEBUG/INFO/WARNING/ERROR/CRITICAL)", type=str, default="INFO")
 
     args = parser.parse_args()
@@ -43,7 +51,7 @@ def main():
     elif args.name == "merge":
         ret, et = evaluate(mergesort, lst)
 
-    logging.debug("Original list: {}".format(args.input))
+    logging.debug("Original list: {}".format(lst))
     logging.debug("Sorted list: {}".format(ret))
     logging.info("Length of the list: {}".format(len(ret)))
     logging.info("Elapsed time: {}s".format(et))
